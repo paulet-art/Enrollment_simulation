@@ -5,40 +5,53 @@ class Student():
         self.enrolled_courses = enrolled_courses
         self.fee_paid = False
         self.total_fee = 0
+
 class Course():
     def __init__(self, name, no_students=150, fees_per_sem=40000,required_cluster_points=39):
         self.name = name
         self.no_numbers = no_students
         self.fees_per_sem = fees_per_sem
+        self.required_cluster_points = required_cluster_points
 
 class Accomodation():
-    def __init__(self, no_rooms=150, fees_per_room=6500):
+    def __init__(self, name, no_rooms=150, fees_per_room=6500):
+        self.name = name
         self.no_rooms = no_rooms
         self.fees_per_room = fees_per_room
 
 # Define the courses and their corresponding fee values
 courses = [
-    ["Math",100,1000],
-    ["Science",180,800],
-    ["History",200,600],
-    ["English",160,700],
-    ["Art",80,500]
+    ["Math",100,1000,40],
+    ["Science",180,800,35],
+    ["History",200,600,30],
+    ["English",160,700,25],
+    ["Art",80,500,20]
 ]
+
+hostels = [
+    ["Ndovu",100],
+    ["Kifaru",80],
+    ["Njiwa",200],
+    ["Chui",160],
+    ["Farasi",80]
+]
+
 student_data = [
-    {"name": "Alice", "cluster_points": 12, "enrolled_courses": ["Math", "Science", "Art"]},
-    {"name": "Bob", "cluster_points": 8, "enrolled_courses": ["History", "English"]},
-    {"name": "Charlie", "cluster_points": 10, "enrolled_courses": ["Science", "Art", "English"]},
-    {"name": "David", "cluster_points": 6, "enrolled_courses": ["Math", "History"]},
-    {"name": "Eva", "cluster_points": 11, "enrolled_courses": ["Math", "Science", "History", "English"]}
+    {"name": "Alice", "cluster_points": 30, "enrolled_courses": ["Math", "Science", "Art"]},
+    {"name": "Bob", "cluster_points": 27, "enrolled_courses": ["History", "English"]},
+    {"name": "Charlie", "cluster_points": 41, "enrolled_courses": ["Science", "Art", "English"]},
+    {"name": "David", "cluster_points": 35, "enrolled_courses": ["Math", "History"]},
+    {"name": "Eva", "cluster_points": 20, "enrolled_courses": ["Math", "Science", "History", "English"]}
 ]
 student_database = [Student(i["name"], i["cluster_points"], i["enrolled_courses"]) for i in student_data]
-courses_database = [Course(i[0],i[1],1[2]) for i in courses]
+courses_database = [Course(i[0],i[1],1[2],i[3]) for i in courses]
+hostels_database = [Accomodation(i[0],i[1]) for i in hostels]
 
 # Function to check if the student satisfies the set cluster points to pay the fee
 def check_cluster_points(student):
     # Assuming the required cluster points to pay the fee is 10
-    required_cluster_points = 10
-    if student.cluster_points <=required_cluster_points:
+    
+    if student.cluster_points <= required_cluster_points:
         student.fee_paid = True
 
 # Function to enroll a student
