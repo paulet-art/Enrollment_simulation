@@ -7,7 +7,7 @@ class Course():
         if "max_students" not in kwargs.keys():
             self.max_students = 150
         else:
-            self.fees_per_sem = kwargs["max_students"]
+            self.max_students = kwargs["max_students"]
         if "fees_per_sem" not in kwargs.keys():
             self.fees_per_sem = 40000
         else:
@@ -22,7 +22,7 @@ class Course():
         Course._id += 1
         
     def __str__(self):
-        return "{}".format(self.name)
+        return "{} at {}".format(self.name, self.required_cluster_points)
     
     def add_student(self, student):
         if student.id not in Course._students.keys():

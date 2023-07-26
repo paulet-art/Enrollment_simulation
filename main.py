@@ -1,10 +1,10 @@
 from base_models.enrollment import Enrollment
-from dummy import student_database
+from base_models.dummy import student_database
 
 # before enrollment
 for student in student_database:
-    student.display_student()
+    student.create_report()
     Enrollment.enroll_student(student)
-    student.display_student("finial")
+    student.create_report("finial")
     
 

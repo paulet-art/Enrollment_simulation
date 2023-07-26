@@ -1,8 +1,6 @@
 from .student import Student
-from dummy import hostels_database, courses_database
-#assumption
-#fees per sem remains constant
-#allocation of resources done in queue format dependent on fee payment
+from .dummy import hostels_database, courses_database
+
 
 #create intances
 class Enrollment():
@@ -15,7 +13,7 @@ class Enrollment():
                     student.course = i
                     student.fee_balance = i.fees_per_sem
                     student.pay_fee(previous_payment)
-                    i.add_student()
+                    i.add_student(student)
     @classmethod
     def find_hostel(cls, student: Student):
         for i in hostels_database:
