@@ -1,7 +1,8 @@
 from .email import Email
 from .common import randomize
+from .logger import Logger
 
-class Student():
+class Student(Logger):
     _id = 0
     _enrolled = []
     def __init__(self, **kwargs):
@@ -75,20 +76,6 @@ class Student():
         print(f"Student Email: {email}")
         print("\n")
         self.create_report(state)
-
-    def create_report(self, state="initial"):
-        uuid = "{}_{}_{}".format(self.name.replace(" ","_"), self.id, state)
-        status = "Paid" if self.full_fee_paid else "not paid yet"
-        hostel = f"{self.hostel.name}" if self.hostel else "not yet booked"
-        email = f"{self.email}" if self.email else "not created yet"
-        with open(f"reports/{uuid}", "w") as f:
-            f.write(f"Name: {self.name}\n")
-            f.write(f"Cluster Points: {self.cluster_points}\n")
-            f.write(f"Course to take: {self.course}\n")
-            f.write(f"Hostel to take: {hostel}\n")
-            f.write(f"Fee Payment Status: {status}\n")
-            f.write(f"Fee Balance: {self.fee_balance}\n")
-            f.write(f"Student Email: {email}\n")
 
                     
 
