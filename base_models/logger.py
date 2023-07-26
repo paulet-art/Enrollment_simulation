@@ -40,8 +40,8 @@ class Logger():
             if k == "Student":
                 current += "/enrolled"
             cls.create_path(f"reports/{current}")
-
             for obj in data:
-                with open(f"reports/{current}/{obj.name}_{obj.id}", "w") as f:
+                uuid = "{}_{}".format(obj.name.replace(" ","_"),obj.id)
+                with open(f"reports/{current}/{uuid}", "w") as f:
                      for k, v in obj.__dict__.items():
                         f.write("{}: {}\n".format(k.replace("_"," "), v))
