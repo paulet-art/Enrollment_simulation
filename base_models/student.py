@@ -1,10 +1,10 @@
 from .email import Email
 from .common import randomize
-from .logger import Logger
 
-class Student(Logger):
+class Student():
     _id = 0
     _enrolled = []
+    _students = []
     def __init__(self, **kwargs):
         self.first_name = kwargs["first_name"]
         self.middle_name = kwargs["middle_name"]
@@ -22,11 +22,14 @@ class Student(Logger):
         self.id = Student._id
         self.requires_accomodation = False
         Student._id += 1
+        Student._students.append(self)
 
     def get_full(self):
         return "{} {} {}".format(self.first_name,self.middle_name,self.last_name)
     
-    
+    @classmethod
+    def add_enrolled(cls, student):
+        cls._enrolled.append(student)
     def calc_cluster(self):
         min = self.course.required_cluster_points
         rand = 48 - self.course.required_cluster_points
@@ -46,7 +49,6 @@ class Student(Logger):
         return self
     
     def rand_pay_fee(self):
-        extra = randomize(self.course.fees_per_sem/2)
         amount = self.course.fees_per_sem
         self.pay_fee(amount)
         return self
@@ -55,6 +57,10 @@ class Student(Logger):
         self.fee_balance -= amount
         self.full_fee_paid = self.fee_balance <= 0
         return self
+    
+    @classmethod
+    def get_all(cls):
+        return cls._enrolled
     
     def finished_process(self):
         Student._enrolled.append(self)
@@ -75,7 +81,6 @@ class Student(Logger):
         print(f"Fee Balance: {self.fee_balance}")
         print(f"Student Email: {email}")
         print("\n")
-        self.create_report(state)
 
                     
 

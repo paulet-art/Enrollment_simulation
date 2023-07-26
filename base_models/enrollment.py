@@ -30,4 +30,5 @@ class Enrollment():
                 if student.requires_accomodation:
                     cls.find_hostel(student)
                 student.generate_email()
+                Student.add_enrolled(student)
         return student
